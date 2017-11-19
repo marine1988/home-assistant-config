@@ -27,28 +27,28 @@ homeassistant:
         color_off: '#616161'
         entities:
           # Line 1 - TV
-          - entity: switch.tv
+          - entity: switch.candeiro_sofa
             caption: 
             icon: mdi:monitor
             column: 1
             row: 1
-          - entity: script.tv_h1
+          - entity: switch.radio
             icon: mdi:android
             column: 2
             row: 1
-          - entity: script.tv_antena
+          - entity: switch.leds_bancada_cozinha
             icon: mdi:radio-tower
             column: 3
             row: 1
-          - entity: script.tv_voldown
+          - entity: switch.luz_casa_de_banho
             icon: mdi:mdi:volume-medium
             column: 4
             row: 1            
-          - entity: script.tv_volup
+          - entity: switch.aiai
             icon: mdi:mdi:volume-high
             column: 5
             row: 1
-          - entity: switch.tv_mute
+          - entity: switch.regar_plantas_varanda
             icon: mdi:volume-off
             column: 6
             row: 1
@@ -95,26 +95,23 @@ homeassistant:
         column_width: 88px
         color: 'var(--paper-card-background-color)'
         entities:
-          - entity: script.mp_radio
+          - entity: script.radio_play
             image: /local/icons/kpop.png
             column: 1
             row: 1
-          - entity: script.mp_podcast          
+          - entity: script.radio_pause        
             image: /local/icons/podcast.png
             column: 2
             row: 1
-          - entity: script.mp_barney
+          - entity: script.radio_pause_geral
             image: /local/icons/barney.png
             column: 3
             row: 1
-          - entity: script.mp_relax01
+          - entity: script.radio_play_geral
             image: /local/icons/rain.png
             column: 4
             row: 1
-          - entity: script.mp_nature
-            image: /local/icons/nature.png
-            column: 5
-            row: 1
+       
             
 
 ##################################################
@@ -126,14 +123,13 @@ group:
     name: Control Panel
     entities:
       - script.remote_control      
-      - sensor.last_command
+     
       
   remote_control_moods:
     name: Moods
     entities:
       - script.remote_control_moods
-      - input_number.mp_volume
-
+      
 
 ##################################################
 ## Scripts
