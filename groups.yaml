@@ -14,8 +14,7 @@ default_view:
     - group.automacoes
     - group.familia
     - group.radio
-    - group.remote_control
-    - group.remote_control_moods
+    - group.g1
     
 
 Horas_das_automacoes:
@@ -78,6 +77,7 @@ sensoresdecasa:
     - switch.luz_casa_de_banho
     - switch.aiai
     - sensor.vibracao
+    - input_text.dummy_tiles
     
 
     
