@@ -1,0 +1,11 @@
+modoferias:
+  name: Modo Férias
+  initial: 'Off'
+  icon: 'mdi:beach'
+  
+portawc:
+  name: Automacão Porta Wc
+  initial: 'On'
+  icon: 'mdi:gesture-double-tap'
+  
+  

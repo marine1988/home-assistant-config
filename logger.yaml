@@ -1,0 +1,32 @@
+default: warning
+logs:
+  homeassistant.setup: error
+  homeassistant.loader: error
+  homeassistant.core: error
+  homeassistant.components.sensor: error
+  homeassistant.components.media_player: error
+  homeassistant.helpers.template: error
+  homeassistant.helpers.entity: error
+  homeassistant.components.telegram_bot.polling: error 
+  homeassistant.components.device_tracker.mqtt: error
+  homeassistant.components.automation.time: error
+  homeassistant.components.automation.mqtt: error
+  homeassistant.components.tts.google: error
+  homeassistant.components.binary_sensor: error
+  homeassistant.components.script: error
+  homeassistant.components.sensor.darksky: error
+  homeassistant.components.sensor.time_date: error
+  homeassistant.components.sensor.google_travel_time: error
+  homeassistant.components.zone: error
+  homeassistant.components.notify.telegram: error
+  homeassistant.components.switch.broadlink: error
+  homeassistant.components.group: error
+  homeassistant.components.discovery: error
+  homeassistant.components.media_player.panasonic_viera: error
+  homeassistant.components.media_player.cast: error
+  homeassistant.components.camera.generic: error
+  homeassistant.components.switch: error
+  homeassistant.components.device_tracker.ping: error
+  homeassistant.components.device_tracker.mqtt_json: error
+  homeassistant.components.android_ip_webcam: error
+  homeassistant.components.config.customize: error

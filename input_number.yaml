@@ -1,0 +1,92 @@
+########## Radio ############
+ligarradiohoras:
+  name: Horas
+  min: 0
+  max: 23
+  step: 1
+  icon: mdi:timer
+
+ligarradiominutos:
+  name: Minutos
+  min: 0
+  max: 55
+  step: 5
+  icon: mdi:timer
+  
+desligarradiohoras:
+  name: Horas
+  min: 0
+  max: 23
+  step: 1
+  icon: mdi:timer
+
+desligarradiominutos:
+  name: Minutos
+  min: 0
+  max: 55
+  step: 5
+  icon: mdi:timer
+########## LUZ WC ############
+lluzwcmanhahrs:
+  name: Horas
+  min: 0
+  max: 23
+  step: 1
+  icon: mdi:timer
+  
+dluzwcmanhamin:
+  name: Minutos
+  min: 0
+  max: 55
+  step: 5
+  icon: mdi:timer
+  
+lluzwcmanhahrsate:
+  name: Horas
+  min: 0
+  max: 23
+  step: 1
+  icon: mdi:timer
+  
+dluzwcmanhaminate:
+  name: Minutos
+  min: 0
+  max: 55
+  step: 5
+  icon: mdi:timer
+
+lluzwcnoitehrs:
+  name: Horas
+  min: 0
+  max: 23
+  step: 1
+  icon: mdi:timer
+  
+dluzwcnoitemin:
+  name: Minutos
+  min: 0
+  max: 55
+  step: 5
+  icon: mdi:timer
+  
+lluzwcnoitehrsate:
+  name: Horas
+  min: 0
+  max: 23
+  step: 1
+  icon: mdi:timer
+  
+dluzwcnoiteminate:
+  name: Minutos
+  min: 0
+  max: 55
+  step: 5
+  icon: mdi:timer
+  
+volume_radio:
+    name: Volume
+    icon: mdi:volume-high
+    min: 0
+    max: 15
+    step: 1
+  

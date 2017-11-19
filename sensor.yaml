@@ -1,0 +1,152 @@
+﻿#SENSORES MQTT    
+- platform: mqtt
+  state_topic: 'home/DHTtoMQTT/dht1/temp'
+  name: 'Temperatura em Casa'
+  unit_of_measurement: 'ºC'
+- platform: mqtt
+  state_topic: 'home/DHTtoMQTT/dht1/hum'
+  name: 'Humidade em Casa'
+  unit_of_measurement: '%'
+- platform: mqtt
+  state_topic: "sensorterra/sensor/terra"
+  name: "Sensorterra"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "ultrasonic/sensor/ultrasonic"
+  name: "ultrasonic"
+  unit_of_measurement: "%"
+- platform: mqtt
+  state_topic: "sonoff1/vibrator/Analog"
+  name: "vibracao"
+  unit_of_measurement: ""
+
+#DARK_SKY
+- platform: darksky
+  api_key: !secret
+  monitored_conditions:
+    - summary
+    - precip_type
+    - precip_probability
+    - temperature
+    - humidity
+    - temperature_max
+    - temperature_min
+#HORAS E TEMPO
+- platform: time_date
+  display_options:
+  - 'time'
+  - 'date'
+  - 'date_time'
+  - 'time_date'
+  - 'time_utc'
+#TEMPLATES  
+- platform: template
+  sensors:
+    estadodotempo:
+      friendly_name: 'Ceu'
+      value_template: > 
+        {%- if is_state('sensor.dark_sky_summary', 'Partly Cloudy') -%}
+          Parcialmente Nublado
+        {%- elif is_state('sensor.dark_sky_summary', 'Clear') -%}
+          Limpo
+        {%- elif is_state('sensor.dark_sky_summary', 'rain') -%}
+          Chuvoso
+        {%- elif is_state('sensor.dark_sky_summary', 'Mostly Cloudy') -%}
+          Muito Nublado
+        {%- endif -%}
+    sunrise:
+      friendly_name: 'Amanhecer'
+      value_template: '{{ as_timestamp(states.sun.sun.attributes.next_rising)|timestamp_custom("%H:%M:%S") }}'
+      entity_id:
+        - sun.sun
+    sunset:
+      friendly_name: 'Por do Sol'
+      value_template: '{{ as_timestamp(states.sun.sun.attributes.next_setting)|timestamp_custom("%H:%M:%S") }}'
+      entity_id:
+        - sun.sun
+    portawc:
+      friendly_name: 'Porta WC'
+      value_template: > 
+        {%- if is_state('binary_sensor.porta_casa_de_banho', 'off') -%}
+           Fechada
+        {%- else -%}
+           Aberta
+        {%- endif -%}
+    rodolfo:
+      friendly_name: 'Estado Rodolfo'
+      value_template: > 
+        {%- if is_state('device_tracker.rodolfo_tlm', 'not_home') and is_state('device_tracker.rodolfo', 'not_home') -%}
+           Ausente
+        {%- endif -%}
+        {%- if is_state('device_tracker.rodolfo_tlm', 'home') and is_state('device_tracker.rodolfo', 'home') -%}
+           Em Casa
+        {%- endif -%}   
+        {%- if is_state('device_tracker.rodolfo_tlm', 'home') and is_state('device_tracker.rodolfo', 'not_home') -%}
+           Em Casa
+        {%- endif -%}      
+        {%- if is_state('device_tracker.rodolfo_tlm', 'not_home') and is_state('device_tracker.rodolfo', 'home') -%}
+           Em Casa
+        {%- endif -%}    
+        {%- if is_state('device_tracker.rodolfo_tlm', 'not_home') and is_state('device_tracker.rodolfo', 'notrabalho') -%} 
+           No Trabalho
+        {%- endif -%}              
+    mqtt:
+       value_template: '{% if is_state("sensor.mosquitto", "running") %}A correr {% else %}Parado {% endif %}'
+       friendly_name: 'Servidor MQTT'
+    tvsala:
+      friendly_name: 'Tv da Sala'
+      value_template: > 
+        {%- if is_state('media_player.panasonic_viera_tv', 'off') -%}
+           Desligada
+        {%- else -%}
+           Ligada
+        {%- endif -%}
+    tvcozinha:
+      friendly_name: 'Tv da Cozinha'
+      value_template: > 
+        {%- if is_state('switch.ligaredesligar', 'off') -%}
+           Desligada
+        {%- else -%}
+           Ligada
+        {%- endif -%}
+#automaçao para ligar o radio
+    ligarradio:
+      friendly_name: 'Ligar rádio do Wc às:'
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.ligarradiohoras") | int, states("input_number.ligarradiominutos") | int) }}' 
+    desligarradio:  
+      friendly_name: 'Desligar rádio do Wc às:'
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.desligarradiohoras") | int, states("input_number.desligarradiominutos") | int) }}'   
+#automacao para ligar a luz do wc de x às x horas     
+    lluzwcmanha:
+      friendly_name: 'Ligar luz do Wc horário da manhã das:'
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.lluzwcmanhahrs") | int, states("input_number.dluzwcmanhamin") | int) }}' 
+    lluzwcmanhaate:  
+      friendly_name: 'às:'
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.lluzwcmanhahrsate") | int, states("input_number.dluzwcmanhaminate") | int) }}'  
+    lluzwcnoite:
+      friendly_name: 'Ligar luz do Wc horário da noite das:'
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.lluzwcnoitehrs") | int, states("input_number.dluzwcnoitemin") | int) }}' 
+    lluzwcnoiteate:  
+      friendly_name: 'às:'
+      value_template: '{{ "%0.02d:%0.02d" | format(states("input_number.lluzwcnoitehrsate") | int, states("input_number.dluzwcnoiteminate") | int) }}'  
+    horalimite:  
+      value_template: '{{ "23:59" }}' 
+#TRAVEL_TIME
+- platform: google_travel_time
+  name: rodolfo_trabalho
+  api_key: !secret
+  origin: !secret
+  destination: !secret
+  options:
+    mode: driving    
+#BATERIA_RODOLFO
+- platform: mqtt
+  state_topic: "zanzito/rodolfo/battery_level"
+  name: "Rodolfo Bateria Telemovel"
+  unit_of_measurement: '%'
+  retain: true
+    
+        
+        
+        
+        

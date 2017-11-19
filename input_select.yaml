@@ -1,0 +1,18 @@
+estacoes_de_radio:
+  name: 'Seleciona a estacao de Radio:'
+  options:
+    - Orbital
+    - Oxigenio
+    - Mega Hits
+    - RFM
+    - Meo Sudoeste
+    
+zona_onde_toca:
+  name: 'Seleciona a zona onde toca:'
+  options:
+    - Sala
+    - Cozinha
+  icon: mdi:speaker-wireless
+  
+
+    

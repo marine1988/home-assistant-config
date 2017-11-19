@@ -1,0 +1,13 @@
+- platform: ping
+  hosts:
+    rodolfo_tlm: 192.168.1.118
+    paula_tlm: 192.168.1.75
+    
+- platform: mqtt_json
+  devices:
+   rodolfo: zanzito/rodolfo/location
+  track_new_devices: True
+  interval_seconds: 10
+  consider_home: 20
+
+  

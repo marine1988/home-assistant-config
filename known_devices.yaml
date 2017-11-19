@@ -1,0 +1,45 @@
+android138a9a0024076c02lan:
+  hide_if_away: false
+  icon:
+  mac: 00:A4:ED:0D:27:34
+  name: android-138a9a0024076c02.lan
+  picture:
+  track: true
+  vendor: unknown
+
+
+acurite:
+  hide_if_away: false
+  icon:
+  mac:
+  name: acurite
+  picture:
+  track: true
+  vendor:
+
+rodolfo_tlm:
+  hide_if_away: false
+  icon:
+  mac:
+  name: rodolfo tlm
+  picture:
+  track: true
+  vendor:
+
+paula_tlm:
+  hide_if_away: false
+  icon:
+  mac:
+  name: paula tlm
+  picture:
+  track: true
+  vendor:
+
+rodolfo:
+  hide_if_away: false
+  icon:
+  mac:
+  name: rodolfo
+  picture:
+  track: true
+  vendor:

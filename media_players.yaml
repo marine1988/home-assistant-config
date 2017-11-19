@@ -1,0 +1,10 @@
+- platform: panasonic_viera
+  host: 192.168.1.73
+  mac: E0.CE.C3.22.CB.AE
+  
+  
+- platform: cast
+
+
+  
+  

@@ -1,0 +1,76 @@
+- platform: broadlink
+  host: 192.168.1.68
+  mac: 'b4:43:0d:f9:1d:03'
+  switches:
+    ligaredesligar:
+      friendly_name: 'ligaredesligar'
+      command_on: 'JgBYAAABJZQRExESEhISEhISEhISNhISEhISEhISEhIRExETETcSEhISEjYSEhI3EhIRExESEhISNxISETcSEhI3ETcSNxI2EgAGDgABJkoSAAxCAAElShIADQU='
+      command_off: 'JgBYAAABJZQRExESEhISEhISEhISNhISEhISEhISEhIRExETETcSEhISEjYSEhI3EhIRExESEhISNxISETcSEhI3ETcSNxI2EgAGDgABJkoSAAxCAAElShIADQU='
+    rtp1:
+      friendly_name: 'rtp1'
+      command_on: 'JgBYAAABJpMSEhESEhISEhISEhISNhMREhISEhISEhISEhESEjcSEhI3ERISEhISEhISEhISEhIREhI3EjcRNxI3EjYSNxI3EQAGDgABJ0kSAAxCAAEmSRMADQU='
+      
+      
+- platform: mqtt
+  name: "Candeiro Sofá"
+  state_topic: "stat/sonoff/POWER"
+  command_topic: "cmnd/sonoff/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+  
+  
+- platform: mqtt
+  name: "Rádio"
+  state_topic: "stat/sonoff69/POWER"
+  command_topic: "cmnd/sonoff69/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+  
+- platform: mqtt
+  name: "Leds Bancada Cozinha"
+  state_topic: "stat/sonoff108/POWER"
+  command_topic: "cmnd/sonoff108/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+  
+- platform: mqtt
+  name: "Regar Plantas Varanda"
+  state_topic: "stat/sonoff1/POWER"
+  command_topic: "cmnd/sonoff1/power"
+  qos: 1
+  payload_on: "1"
+  payload_off: "0"
+  retain: true
+ # optimistic: true
+ 
+- platform: mqtt
+  name: "Luz Casa de Banho"
+  state_topic: "stat/sonoffwcluz/POWER"
+  command_topic: "cmnd/sonoffwcluz/power"
+  qos: 1
+  payload_on: "ON"
+  payload_off: "OFF"
+  retain: true
+  
+
+- platform: mqtt
+  name: "aiai"
+  state_topic: "sala/luz"
+  command_topic: "sala/luz/set"
+  payload_on: "ON"
+  payload_off: "OFF"
+  qos: 1
+  retain: true
+ # optimistic: true
+ 
+
+  
+
+
+      

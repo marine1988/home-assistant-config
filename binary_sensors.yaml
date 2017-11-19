@@ -1,0 +1,58 @@
+- platform: mqtt
+  state_topic: "home/433toMQTT"
+  name: "Campainha"
+  payload_on: "10340193"
+  payload_off: "10340193off"
+  
+  
+- platform: mqtt
+  state_topic: "home/433toMQTT"
+  name: "Porta Casa de Banho"
+  payload_on: "4864686"
+  payload_off: "4864679"
+  
+  
+- platform: mqtt
+  state_topic: "home/433toMQTT"
+  name: "correio"
+  payload_on: "1035062"
+  payload_off: "1035062off"
+  
+  
+- platform: mqtt
+  state_topic: "occupancy/homewifi"
+  name: "rodolfo"
+  payload_on: "connected"
+  payload_off: "disconnected"
+  
+- platform: mqtt
+  state_topic: "home/433toMQTT"
+  name: "porta da escada"
+  payload_on: "11768071"
+  payload_off: "11768071off"
+  
+- platform: mqtt
+  state_topic: "home/433toMQTT"
+  name: "Leds da bancada"
+  payload_on: "11991929"
+  payload_off: "11991929off"
+  
+
+  
+
+  
+
+
+  
+
+  
+ 
+      
+      
+      
+  
+
+  
+  
+  
+  

@@ -1,0 +1,178 @@
+#chromecast
+script.radio_play:
+  friendly_name: Tocar na zona selecionada
+  icon: mdi:play
+script.radio_play_geral:
+  friendly_name: Tocar na casa Toda
+  icon: mdi:play
+script.radio_pause:
+  friendly_name: Parar na zona Selecionada
+  icon: mdi:pause
+script.radio_pause_geral:
+  friendly_name: Parar em todas as zonas
+  icon: mdi:pause
+#darksky 
+sensor.dark_sky_temperature:
+  friendly_name: "Temperatura na Rua"
+  icon: mdi:thermometer
+sensor.dark_sky_summary:
+  friendly_name: "Ceu"
+  icon: mdi:information-outline
+sensor.dark_sky_humidity:
+  friendly_name: "Humididade na Rua"
+  icon: mdi:water
+sensor.dark_sky_precip:
+  friendly_name: "Precipitação"
+sensor.dark_sky_precip_probability:
+  friendly_name: "Probabilidade de Precipitação"
+sensor.dark_sky_daily_high_temperature:
+  friendly_name: "Temperatura Máxima"
+sensor.dark_sky_daily_low_temperature:
+  friendly_name: "Temperatura Mínima"
+sensor.estadodotempo:
+  friendly_name: "Ceu"
+  icon: mdi:cloud-outline
+####### DEVICE_TRACKERS######
+sensor.rodolfo:
+  icon: mdi:human-male
+####CAMPAINHA ESCADA########
+sensor.campainha_escada:
+  friendly_name: "Campainha"
+  icon: mdi:bell
+#####AMBIENTE EM CASA#######  
+sensor.temperatura_em_casa:
+  friendly_name: "Temperatura em Casa"
+  icon: mdi:thermometer
+sensor.humidade_em_casa:
+  friendly_name: "Humidade em Casa"
+  icon: mdi:water
+######GOOGLE TRAVEL#####
+sensor.rodolfo_trabalho:
+  friendly_name: "Rodolfo até ao Trabalho"
+  icon: mdi:car
+sensor.rodolfo_casa_pe:
+  friendly_name: "Rodolfo até Casa"
+  icon: mdi:run
+sensor.paula_casa_pe:
+  friendly_name: "Paula até Casa"
+  icon: mdi:run
+####PORTA CASA DE BANHO########
+sensor.portawc:
+  icon: mdi:glassdoor
+####TVS########
+sensor.tvsala:
+  friendly_name: "Tv da Sala"
+  icon: mdi:desktop-mac
+sensor.tvcozinha:
+  friendly_name: "Tv da Cozinha"
+  icon: mdi:desktop-mac
+####PLANTAS########
+sensor.plantas:
+  friendly_name: "Plantas"
+  icon: mdi:flower
+switch.radio:
+  friendly_name: "Rádio"
+  icon: mdi:radio   
+switch.luz_casa_de_banho:
+  icon: mdi:lightbulb-outline     
+switch.leds_bancada_cozinha:
+  friendly_name: "Leds Bancada Cozinha"
+  icon: mdi:lightbulb-outline  
+switch.regar_plantas_varanda:
+  icon: mdi:flower
+sensor.ligarradio:
+  icon: mdi:radio
+sensor.desligarradio:
+  icon: mdi:radio
+sensor.lluzwcmanha:
+  icon: mdi:lightbulb-outline
+sensor.lluzwcmanhaate:
+  icon: mdi:lightbulb-outline
+sensor.lluzwcnoite:
+  icon: mdi:lightbulb-outline
+sensor.lluzwcnoiteate:
+  icon: mdi:lightbulb-outline
+#####P E R S I S T E N C E####
+automation.persistence_publish:
+  friendly_name: "Persistence Publish"
+automation.persistence_subscribe_binary:
+  friendly_name: "Persistence Subscribe (Binary)"
+automation.persistence_subscribe_select_option:
+  friendly_name: "Persistence Subscribe (Select Option)"
+automation.persistence_subscribe_select_value:
+  friendly_name: "Persistence from MQTT (Select Value)"
+# RADIO
+input_number.ligarradiohoras:
+  persistent: true
+input_number.ligarradiominutos:
+  persistent: true
+input_number.desligarradiohoras:
+  persistent: true
+  icon: mdi:timer
+input_number.desligarradiominutos:
+#LAMPADA WC
+  persistent: true
+  icon: mdi:timer
+input_number.lluzwcmanhahrs:
+  persistent: true
+  icon: mdi:timer
+input_number.dluzwcmanhamin:
+  persistent: true
+  icon: mdi:timer
+input_number.lluzwcmanhahrsate:
+  persistent: true
+  icon: mdi:timer
+input_number.dluzwcmanhaminate:
+  persistent: true
+  icon: mdi:timer
+input_number.lluzwcnoitehrs:
+  persistent: true
+  icon: mdi:timer
+input_number.dluzwcnoitemin:
+  persistent: true
+  icon: mdi:timer
+input_number.lluzwcnoitehrsate:
+  persistent: true
+  icon: mdi:timer
+input_number.dluzwcnoiteminate:
+  persistent: true
+  icon: mdi:timer
+switch.candeiro_sofa:
+  persistent: true
+  icon: mdi:lightbulb-outline   
+  
+  
+  
+  
+ 
+
+
+
+
+
+  
+
+# Scripts
+
+  
+  
+
+# Switchs
+switch.tv:
+  friendly_name: "Tv da Cozinha"
+  icon: mdi:monitor
+
+  
+
+
+################
+# TAB ORDERING #
+################
+group.home:
+  order: 1
+group.teste:
+  order: 2
+  
+
+
+       

@@ -1,0 +1,384 @@
+- id: testessss
+  alias: "vOLUME TELEMOVEIS"
+  trigger:
+    platform: state
+    entity_id: input_number.volume_radio
+  action:
+    service: mqtt.publish
+    data_template:
+      topic: 'zanzito/rodolfo/notification'
+      payload_template: '{{states.input_number.volume_radio.state | int}}'
+####################################################################
+
+
+
+#VOLUME RADIO
+#- alias: 'Ajustar o volume do Rádio'
+#  trigger:
+#    platform: state
+#    entity_id: input_number.volume_radio
+#  action:
+#    service: media_player.volume_set
+#    data_template:
+#      entity_id: >
+#        {%- if is_state('input_select.zona_onde_toca', 'Cozinha') -%}
+#              media_player.Cozinha
+#       {%- elif is_state('input_select.zona_onde_toca', 'Sala') -%}
+#              media_player.Sala
+#        {%- endif -%}
+#      volume_level: '{{  states.input_number.volume_radio.state  }}'
+#CAMPAINHA DEBAIXO
+- id: campainha_de_baixo
+  alias: Campainha_de_baixo
+  trigger:
+    platform: numeric_state
+    entity_id: sensor.vibracao
+    above: 500
+  action:
+  - service: notify.telegramp
+    data:
+      message: "Campainha da porta da rua tocou"
+  - service: notify.telegram
+    data:
+      message: "Campainha da porta da rua tocou"
+  - service: notify.telegrams4
+    data:
+      message: "Campainha da porta da rua tocou"
+#CAMPAINHA DE CIMA
+- id: campainha_de_cima
+  alias: Campainha_de_cima
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.Campainha
+    to: 'on'
+  action:
+  - service: mqtt.publish
+    data:
+      topic: home/433toMQTT
+      payload: 10340193off
+      retain: 'true'
+  - service: notify.telegram
+    data:
+      title: Home Assistant
+      message: Campainha Escada
+      data:
+        photo:
+          url: http://192.168.1.76:8080/photo.jpg
+          caption: Campainha da Escada
+  - service: notify.telegramp
+    data:
+      title: Home Assistant
+      message: Campainha Escada
+      data:
+        photo:
+          url: http://192.168.1.76:8080/photo.jpg
+          caption: Campainha da Escada
+#LIGAR CANDEIRO SALA
+- id: candeiro_sala_ligar
+  alias: Candeeiro_sala_ligar
+  trigger:
+    platform: time
+    at: '17:30:00'
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.candeiro_sofa
+#DESLIGAR CANDEIRO SALA
+- id: candeiro_sala_desligar
+  alias: Candeeiro_sala_desligar
+  trigger:
+    platform: time
+    at: '04:30:00'
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.candeiro_sofa
+#DESLIGAR LUZ CASA DE BANHO
+- id: desligarluzcasadebanho
+  alias: desligarluzcasadebanho
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.porta_casa_de_banho
+    to: 'off'
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.luz_casa_de_banho
+#LIGAR LUZ CASA DE BANHO
+- id: ligar_luz_casa_de_banho
+  alias: ligarluzcasadebanho
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.porta_casa_de_banho
+    to: 'on'
+  condition:
+    condition: and
+    conditions:
+      - condition: state
+        entity_id: input_boolean.modoferias
+        state: 'off'
+      - condition: or
+        conditions:
+          - condition: template
+            value_template: '{{ states.sensor.time.state > states.sensor.lluzwcmanha.state and states.sensor.time.state < states.sensor.lluzwcmanhaate.state}}'
+          - condition: template
+            value_template: '{{ states.sensor.time.state > states.sensor.lluzwcnoite.state and states.sensor.time.state < states.sensor.horalimite.state }}'
+          - condition: template
+            value_template: '{{ states.sensor.time.state < states.sensor.lluzwcnoiteate.state }}'
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.luz_casa_de_banho
+#DESLIGAR RADIO WC
+- id: desligar_radio_wc
+  alias: desligar_radio_wc
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.porta_casa_de_banho
+    to: 'off'
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.radio
+#LIGAR RADIO WC
+- id: ligar_radio_wc
+  alias: ligar_radio_wc
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.porta_casa_de_banho
+    to: 'on'
+  condition:
+  - condition: state
+    entity_id: input_boolean.modoferias
+    state: 'off'
+  - condition: template
+    value_template: '{{ states.sensor.time.state > states.sensor.ligarradio.state and states.sensor.time.state < states.sensor.desligarradio.state }}'
+  action:
+    service: switch.turn_on
+    data:
+      entity_id: switch.radio
+#DESLIGAR TV
+- id: desligar_tv
+  alias: desligar_Tv
+  trigger:
+    platform: time
+    at: '08:55:00'
+  condition:
+  - condition: state
+    entity_id: switch.ligaredesligar
+    state: 'on'
+  action:
+    service: switch.turn_off
+    data:
+      entity_id: switch.ligaredesligar
+#LIGAR TV
+- id: ligar_tv
+  alias: ligar_tv
+  trigger:
+    platform: time
+    at: '07:46:10'
+  condition:
+  - condition: state
+    entity_id: input_boolean.modoferias
+    state: 'off'
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  action:
+    service: script.ligartv
+#ESTADO DO TEMPO
+- id: estado_do_tempo
+  alias: Estado_do_Tempo
+  trigger:
+    at: '07:40:00'
+    platform: time
+  action:
+    - service: notify.telegramp
+      data:
+        message: "Bom dia Paula, estão {{ states.sensor.temperatura_em_casa.state }} graus em casa. Hoje o céu está {{ states.sensor.estadodotempo.state }} estão neste momento {{ states.sensor.dark_sky_temperature.state }} graus , e {{ states.sensor.dark_sky_humidity.state }}% de humidade. A temperatura máxima vai ser de {{ states.sensor.dark_sky_daily_high_temperature.state }} graus e {{ states.sensor.dark_sky_daily_low_temperature.state }} graus de mínima. Existe {{ states.sensor.dark_sky_precip_probability.state }}% de probabilidade de chover hoje.{% if states('sensor.dark_sky_precip_probability') | int > 50 %} Não te esqueças de levar o chapéu de chuva. Tem um bom dia chuvoso ;){% else %} Tem um bom dia beijinhos {% endif %}"
+    - service: notify.telegram
+      data:
+        message: "Bom dia , estão {{ states.sensor.temperatura_em_casa.state }} graus em casa. Hoje o céu está {{ states.sensor.estadodotempo.state }} estão neste momento {{ states.sensor.dark_sky_temperature.state }} graus , e {{ states.sensor.dark_sky_humidity.state }}% de humidade. A temperatura máxima vai ser de {{ states.sensor.dark_sky_daily_high_temperature.state }} graus e {{ states.sensor.dark_sky_daily_low_temperature.state }} graus de mínima. Existe {{ states.sensor.dark_sky_precip_probability.state }}% de probabilidade de chover hoje.{% if states('sensor.dark_sky_precip_probability') | int > 50 %} Não te esqueças de levar o chapéu de chuva. Tem um bom dia chuvoso ;){% else %} Tem um bom dia.{% endif %}"
+#LIGAR LEDS DA BANCADA        
+- id: leds_bancada_cozinha
+  alias: Leds Bancada Cozinha
+  trigger:
+    platform: mqtt
+    topic: home/433toMQTT
+    payload: '11991929'
+  condition:
+  - condition: state
+    entity_id: input_boolean.modoferias
+    state: 'off'
+  - condition: time
+    after: '18:00'
+    before: '07:00'
+  action:
+  - service: script.turn_on
+    data:
+      entity_id: script.ligarledsbancada
+#NOVO CORREIO
+- id: notificacao_novo_correio
+  alias: Notificacao Novo Correio
+  initial_state: true
+  trigger:
+    platform: state
+    entity_id: binary_sensor.correio
+    to: 'on'
+  action:
+  - service: mqtt.publish
+    data:
+      topic: home/433toMQTT
+      payload: 1035062off
+      retain: 'true'
+  - service: notify.telegram
+    data:
+      message: "Novo Correio"
+  - service: notify.telegramp
+    data:
+      message: "Novo Correio"
+  - service: notify.telegrams4
+    data:
+      message: "Novo Correio"
+#SENSOR PORTA DE CASA ABERTA
+- id: notificacao_sensor_porta_de_casa_aberta
+  alias: Notificacao_sensor_porta_de_casa_aberta
+  initial_state: true
+  trigger:
+  - entity_id: binary_sensor.porta_da_escada
+    platform: state
+    to: 'on'
+  action:
+   - service: mqtt.publish
+     data:
+       payload: 11768071off
+       retain: 'true'
+       topic: home/433toMQTT
+   - service: notify.telegram
+     data:
+       message: "Porta de Casa Aberta"
+   - service: notify.telegramp
+     data:
+       message: "Porta de Casa Aberta"
+#REGA PLANTAS
+- id: regar_plantas
+  alias: Regar Plantas
+  trigger:
+    platform: time
+    at: '18:20:00'
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - wed
+    - fri
+    - sun
+  action:
+  - service: switch.turn_on
+    data:
+      entity_id: switch.regar_plantas_varanda
+  - delay: 00:01:00
+  - service: switch.turn_off
+    data:
+      entity_id: switch.regar_plantas_varanda
+#PERSISTENCE
+- alias: persistence_publish
+  initial_state: 'on'
+  hide_entity: true
+  trigger:
+    - platform: event
+      event_type: state_changed
+  condition:
+    - condition: template
+      value_template: "{{ trigger.event.data is not none }}"
+    - condition: template
+      value_template: "{{ trigger.event.data.new_state is not none }}"
+    - condition: template
+      value_template: "{{ trigger.event.data.new_state.attributes is not none }}"
+    - condition: template
+      value_template: "{{ trigger.event.data.new_state.attributes.persistent|default(false, true) }}"
+    - condition: template
+      value_template: "{{ trigger.event.data.old_state is not none }}"
+    - condition: template
+      value_template: "{{ trigger.event.data.new_state.state != trigger.event.data.old_state.state }}"
+    - condition: or
+      conditions:
+        - condition: template
+          value_template: "{{ trigger.event.data.entity_id.split('.')[0] == 'automation' }}"
+        - condition: template
+          value_template: "{{ trigger.event.data.entity_id.split('.')[0] == 'input_boolean' }}"
+        - condition: template
+          value_template: "{{ trigger.event.data.entity_id.split('.')[0] == 'input_select' }}"
+        - condition: template
+          value_template: "{{ trigger.event.data.entity_id.split('.')[0] == 'input_number' }}"
+        - condition: template
+          value_template: "{{ trigger.event.data.entity_id.split('.')[0] == 'light' }}"
+        - condition: template
+          value_template: "{{ trigger.event.data.entity_id.split('.')[0] == 'switch' }}"
+  action:
+    - service: mqtt.publish
+      data_template:
+        topic: "home-assistant/{{ trigger.event.data.entity_id|replace('.', '/') }}"
+        payload: "{{ trigger.event.data.new_state.state }}"
+        retain: true
+## Persistent Subscriptions
+- alias: persistence_subscribe_binary
+  initial_state: 'on'
+  hide_entity: true
+  trigger:
+    - platform: mqtt
+      topic: home-assistant/automation/+
+    - platform: mqtt
+      topic: home-assistant/input_boolean/+
+    - platform: mqtt
+      topic: home-assistant/light/+
+    - platform: mqtt
+      topic: home-assistant/switch/+
+  condition: &subscribe_condition
+    - condition: template
+      value_template: "{{ ((states[trigger.topic.split('/')[1]][trigger.topic.split('/')[2]]|default).attributes|default).persistent|default(false, true) }}"
+    - condition: template
+      value_template: "{{ not is_state(trigger.topic|replace('home-assistant/', '')|replace('/', '.'), trigger.payload) }}"
+  action: &subscribe_action
+    - service_template: "{{ trigger.topic.split('/')[1] }}.turn_{{ trigger.payload|lower }}"
+      data_template:
+        entity_id: "{{ trigger.topic|replace('home-assistant/', '')|replace('/', '.') }}"
+##
+- alias: persistence_subscribe_select_option
+  initial_state: 'on'
+  hide_entity: true
+  trigger:
+    - platform: mqtt
+      topic: home-assistant/input_select/+
+  condition: *subscribe_condition
+  action:
+    - service_template: "{{ trigger.topic.split('/')[1] }}.select_option"
+      data_template:
+        entity_id: "{{ trigger.topic|replace('home-assistant/', '')|replace('/', '.') }}"
+        option: "{{ trigger.payload }}"
+##
+- alias: persistence_subscribe_select_value
+  initial_state: 'on'
+  hide_entity: true
+  trigger:
+    - platform: mqtt
+      topic: home-assistant/input_number/+
+  condition: *subscribe_condition
+  action:
+    - service_template: "{{ trigger.topic.split('/')[1] }}.set_value"
+      data_template:
+        entity_id: "{{ trigger.topic|replace('home-assistant/', '')|replace('/', '.') }}"
+        value: "{{ trigger.payload }}"
+
+
+
+   

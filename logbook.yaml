@@ -1,0 +1,58 @@
+exclude:
+  domains:
+    - sun
+    - group
+  entities:
+     - input_boolean.portawc
+     - input_boolean.modoferias
+     - input_number.ligarradiohoras
+     - input_number.ligarradiominutos
+     - input_number.desligarradiohoras
+     - input_number.desligarradiominutos
+     - input_number.lluzwcmanhahrs
+     - input_number.dluzwcmanhamin
+     - input_number.lluzwcmanhahrsate
+     - input_number.dluzwcmanhaminate
+     - input_number.lluzwcnoitehrs
+     - input_number.dluzwcnoitemin
+     - input_number.lluzwcnoitehrsate
+     - input_number.dluzwcnoiteminate
+     - input_select.estacoes_de_radio
+     - input_number.volume_radio
+     - script.radio_play
+     - script.radio_pause
+     - script.radio_play_geral
+     - script.radio_pause_geral
+     - sensor.dark_sky_precip_probability
+     - sensor.dark_sky_summary
+     - sensor.dark_sky_daily_low
+     - sensor.dark_sky_daily_high_temperature
+     - sensor.dark_sky_temperature
+     - sensor.dark_sky_precip
+     - sensor.dark_sky_humidity
+     - sensor.porta_escada_battery_level
+     - sensor.lluzwcnoiteate
+     - sensor.desligarradio
+     - sensor.tvsala
+     - sensor.lluzwcnoite
+     - sensor.tvcozinha
+     - sensor.lluzwcmanhaate
+     - sensor.sunrise
+     - sensor.horalimite
+     - sensor.mqtt
+     - sensor.ligarradio
+     - sensor.sunset
+     - sensor.lluzwcmanhaWc
+     - sensor.rodolfo
+     - sensor.portawc
+     - media_player.panasonic_viera
+
+include:
+  domains:
+    - script
+    - notify
+    - switch
+  entities:
+    - device_tracker.rodolfo
+
+

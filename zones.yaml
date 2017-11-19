@@ -1,0 +1,19 @@
+- name: Home
+  latitude: !secret
+  longitude: !secret
+  radius: 50
+  icon: mdi:home
+
+- name: notrabalho
+  latitude: !secret
+  longitude: !secret
+  radius: 50
+  icon: mdi:airplane
+  
+- name: notrabalhop
+  latitude: !secret
+  longitude: !secret
+  radius: 50
+  icon: mdi:bank
+  
+ 

@@ -1,0 +1,182 @@
+################################################
+# Views
+################################################
+default_view:
+  view: yes
+  icon: mdi:home
+  entities:
+    - group.temponarua
+    - group.tempoemcasa
+    - group.sensoresdecasa
+    - group.transito
+    - group.plantas
+    - group.cameras
+    - group.automacoes
+    - group.familia
+    - group.radio
+    - group.remote_control
+    - group.remote_control_moods
+    
+
+Horas_das_automacoes:
+  view: yes
+  icon: mdi:alarm-multiple
+  entities:
+    - group.hora_automacao_radio_wc
+    - group.hora_automacao_luz_wc
+  
+  
+
+
+Interior:
+  view: yes
+  icon: mdi:home-map-marker
+  entities:
+   
+    
+Exterior:
+  view: yes
+  icon: mdi:tree
+  entities:
+   
+
+Varios:
+  view: yes
+  icon: mdi:grid
+  entities:
+    - group.transito
+
+   
+
+################################################
+# Groups
+################################################
+
+
+   
+
+familia:
+  name: Familia
+  entities:
+    - sensor.rodolfo
+    - camera.rodolfo_cam
+    - sensor.rodolfo_bateria_telemovel
+ 
+   
+ 
+    
+    
+sensoresdecasa:
+  name: Sensores de Casa
+  entities:
+    - sensor.portawc
+    - switch.candeiro_sofa
+    - switch.radio
+    - sensor.tvsala
+    - sensor.tvcozinha
+    - switch.leds_bancada_cozinha
+    - switch.luz_casa_de_banho
+    - switch.aiai
+    - sensor.vibracao
+    
+
+    
+temponarua:
+  name: Ambiente Exterior
+  entities:
+ #  - sensor.sunrise
+ #  - sensor.sunset
+    - sensor.estadodotempo
+    - sensor.dark_sky_temperature
+    - sensor.dark_sky_humidity
+
+
+tempoemcasa:
+  name: Ambiente Interior
+  entities:
+    - sensor.temperatura_em_casa
+    - sensor.humidade_em_casa
+    
+
+transito:
+  name: Tempo/Distância
+  entities:
+    - sensor.rodolfo_trabalho
+
+          
+    
+    
+internet:
+  name: Internet
+  entities:
+
+ 
+sistema:
+  name: Sistema
+  entities:
+
+    
+estado:
+  name: Estado
+  entities:
+
+    
+    
+plantas:
+  name: Plantas
+  entities:
+    - switch.regar_plantas_varanda
+    
+    
+cameras:
+  name: Cameras
+  entities:
+    - camera.porta_escada
+    
+automacoes:
+  name: Automações
+  entities:
+    - input_boolean.portawc
+    - input_boolean.modoferias
+    
+hora_automacao_radio_wc:
+  name: Horas Automação Rádio Wc 
+  entities:
+    - sensor.ligarradio
+    - input_number.ligarradiohoras
+    - input_number.ligarradiominutos
+    - sensor.desligarradio
+    - input_number.desligarradiohoras
+    - input_number.desligarradiominutos
+    
+hora_automacao_luz_wc:
+  name: Horas Automação Luz Wc 
+  entities:
+    - sensor.lluzwcmanha
+    - input_number.lluzwcmanhahrs
+    - input_number.dluzwcmanhamin
+    - sensor.lluzwcmanhaate
+    - input_number.lluzwcmanhahrsate
+    - input_number.dluzwcmanhaminate
+    - sensor.lluzwcnoite
+    - input_number.lluzwcnoitehrs
+    - input_number.dluzwcnoitemin
+    - sensor.lluzwcnoiteate
+    - input_number.lluzwcnoitehrsate
+    - input_number.dluzwcnoiteminate
+    
+radio:
+  name: Rádio
+  entities:
+    - input_select.estacoes_de_radio
+    - input_select.zona_onde_toca
+    - input_number.volume_radio
+    - script.radio_play
+    - script.radio_pause
+    - script.radio_play_geral
+    - script.radio_pause_geral
+
+
+  
+ 
+    

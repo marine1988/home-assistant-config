@@ -1,0 +1,104 @@
+#LIGAR TV DA COZINHA
+ligartv:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.ligaredesligar
+    - delay:
+        seconds: 5
+    - service: switch.turn_on
+      data:
+        entity_id: switch.rtp1
+        #LIGAR LEDS BANCADA COZINHA       
+ligarledsbancada:
+  sequence:
+    - service: switch.turn_on
+      data:
+        entity_id: switch.leds_bancada_cozinha
+    - delay:
+        minutes: 10
+    - service: switch.turn_off
+      data:
+        entity_id: switch.leds_bancada_cozinha
+#RADIO        
+radio_play:
+  alias: Play Radio
+  sequence:
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.Sala
+        volume_level: '0.35'
+    - service: media_player.volume_set
+      data:
+        entity_id: media_player.Cozinha
+        volume_level: '0.35'
+    - service: media_player.play_media
+      data_template:
+        entity_id: >
+           {%- if is_state('input_select.zona_onde_toca', 'Cozinha') -%}
+              media_player.Cozinha
+           {%- elif is_state('input_select.zona_onde_toca', 'Sala') -%}
+              media_player.Sala
+           {%- endif -%}
+        media_content_id: >
+            {%- if is_state('input_select.estacoes_de_radio', 'Orbital') -%}
+               http://stream.radio.com.pt/ROLI-ENC-401
+            {%- elif is_state('input_select.estacoes_de_radio', 'Oxigenio') -%}
+               http://stream.radio.com.pt/ROLI-ENC-498
+            {%- elif is_state('input_select.estacoes_de_radio', 'Mega Hits') -%}
+               http://provisioning.streamtheworld.com/pls/mega_hits.pls 
+            {%- elif is_state('input_select.estacoes_de_radio', 'RFM') -%}
+               http://provisioning.streamtheworld.com/pls/rfm.pls 
+            {%- elif is_state('input_select.estacoes_de_radio', 'Meo Sudoeste') -%}   
+               http://stream.radio.com.pt/ROLI-ENC-495
+            {%- endif -%}
+        media_content_type: 'audio/mp3'
+
+
+radio_pause:
+  alias: Pause Radio
+  sequence:
+    - service: media_player.media_pause
+      data_template:
+        entity_id: >
+          {%- if is_state('input_select.zona_onde_toca', 'Cozinha') -%}
+              media_player.Cozinha
+          {%- elif is_state('input_select.zona_onde_toca', 'Sala') -%}
+              media_player.Sala
+          {%- endif -%}
+          
+radio_play_geral:
+  alias: tocar todos
+  sequence:
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.Cozinha
+    - service: media_player.play_media
+      data:
+        entity_id: media_player.Sala
+        
+radio_pause_geral:
+  alias: pausar geral
+  sequence:
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.Cozinha
+    - service: media_player.media_pause
+      data:
+        entity_id: media_player.Sala
+        
+        
+testezanzito:
+  alias: teste zanzito
+  sequence:
+    - service: mqtt.publish
+      data_template:
+        topic: 'zanzito/rodolfo/notification'
+        payload_template: 'teste'
+      
+
+
+
+
+        
+    

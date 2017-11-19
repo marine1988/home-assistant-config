@@ -1,0 +1,107 @@
+homeassistant:
+  name: Geral
+  latitude: !secret 
+  longitude: !secret 
+  elevation: 17
+  unit_system: metric
+  time_zone: Europe/Lisbon
+  customize: !include customize.yaml
+  packages: !include_dir_named packages
+config:
+
+
+
+  
+
+mqtt:
+  broker: 127.0.0.1
+  port: 1883
+  username: username
+  password: password
+  keepalive: 60
+  
+
+
+
+
+
+
+############
+# INCLUDES #
+############
+group: !include groups.yaml
+sensor: !include sensor.yaml
+device_tracker: !include device_tracker.yaml
+switch: !include switches.yaml
+script: !include scripts.yaml
+automation: !include automations.yaml
+notify: !include notify.yaml
+binary_sensor: !include binary_sensors.yaml
+media_player: !include media_players.yaml
+tts: !include googletts.yaml
+input_boolean: !include input_booleans.yaml
+zone: !include zones.yaml
+input_number: !include input_number.yaml
+input_select: !include input_select.yaml
+camera: !include cameras.yaml
+recorder: !include recorder.yaml
+logbook: !include logbook.yaml
+history: !include history.yaml
+logger: !include logger.yaml
+frontend: !include frontend.yaml
+
+
+telegram_bot:
+  platform: polling
+  api_key: !secret 
+  allowed_chat_ids:
+    - !secret 
+    - !secret 
+    - !secret 
+    
+android_ip_webcam:
+  - name: 'Porta Escada'
+    host: 192.168.1.76
+    sensors:
+      - battery_level
+
+
+    
+
+
+
+    
+  
+  
+
+
+
+    
+    
+
+
+
+##########
+# EXTRAS #
+##########
+
+
+
+
+
+
+
+
+
+discovery:
+sun:
+conversation:
+
+
+http:
+  api_password: !secret 
+  trusted_networks:
+    - !secret 
+    - 192.168.1.103
+  ip_ban_enabled: True
+  login_attempts_threshold: 2

@@ -1,0 +1,23 @@
+- name: telegram
+  platform: telegram
+  chat_id: !secret
+  
+- name: telegramp
+  platform: telegram
+  chat_id: !secret
+
+- name: telegrams4
+  platform: telegram
+  chat_id: !secret 
+
+
+
+
+
+
+         
+ 
+ 
+  
+
+  
