@@ -23,3 +23,10 @@ group:
     name: Tiles showcase
     entities:
       - input_text.dummy_tiles
+  
+
+input_text:
+  command:
+    name: Button
+  dummy_tiles:
+    name: dummy
